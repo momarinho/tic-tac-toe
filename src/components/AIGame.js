@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import Board from './Board';
 
-const Game = () => {
+const AIGame = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [winner, setWinner] = useState(null);
+
+  useEffect(() => {
+    if (!xIsNext) {
+      const aiMove = getAiMove(squares);
+      handleClick(aiMove);
+    }
+  }, [xIsNext]);
 
   const handleClick = (index) => {
     if (winner || squares[index]) {
@@ -40,7 +47,25 @@ const Game = () => {
     return null;
   };
 
-  const winner = calculateWinner(squares);
+  const handleReset = () => {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setWinner(null);
+  };
+
+  const getAiMove = (squares) => {
+    // In this simple AI implementation, we'll just have the AI pick a random
+    // empty square to place its piece.
+    const emptySquares = squares.reduce(
+      (acc, curr, index) => (!curr ? [...acc, index] : acc),
+      []
+    );
+    return emptySquares[Math.floor(Math.random() * emptySquares.length)];
+  };
+
+  useEffect(() => {
+    setWinner(calculateWinner(squares));
+  }, [squares]);
 
   const getStatus = () => {
     if (winner) {
@@ -52,26 +77,21 @@ const Game = () => {
     }
   };
 
-  const handleReset = () => {
-    setSquares(Array(9).fill(null));
-    setXIsNext(true);
-  };
-
   return (
     <div className="w-screen h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold mb-4">Two Players Mode</h1>
+      <h1 className="text-3xl font-bold mb-4">TicTacToe</h1>
       <Board squares={squares} onClick={handleClick} />
       {(winner || squares.every(Boolean)) && (
         <button
-          className="bg-gray-500 text-white rounded-md py-2 px-4 mt-4 mb-4 hover:bg-gray-700"
+          className="bg-gray-500 text-white rounded-md py-2 px-4 mt-4 hover:bg-gray-700"
           onClick={handleReset}
         >
           Play again
         </button>
       )}
-      <h1 className="font-bold mt-4">{getStatus()}</h1>
+      <h1>{getStatus()}</h1>
     </div>
   );
 };
 
-export default Game;
+export default AIGame;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Board from './Board';
 
@@ -58,18 +59,24 @@ const Game = () => {
   };
 
   return (
-    <div className="w-screen h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold mb-4">Two Players Mode</h1>
-      <Board squares={squares} onClick={handleClick} />
+    <div className="w-screen h-screen bg-gray-700 flex flex-col items-center justify-center">
+      <h1 className="text-2xl text-gray-100 font-bold mb-4">
+        Two Players Mode
+      </h1>
+      <div className="bg-gray-400 rounded-lg py-4 px-4">
+        <Board squares={squares} onClick={handleClick} />
+      </div>
       {(winner || squares.every(Boolean)) && (
-        <button
-          className="bg-gray-500 text-white rounded-md py-2 px-4 mt-4 mb-4 hover:bg-gray-700"
-          onClick={handleReset}
-        >
-          Play again
-        </button>
+        <div>
+          <button
+            className="bg-gray-500 text-white rounded-md py-2 px-4 mt-4 hover:bg-gray-600"
+            onClick={handleReset}
+          >
+            Play again
+          </button>
+        </div>
       )}
-      <h1 className="font-bold mt-4">{getStatus()}</h1>
+      <h1 className="font-bold text-gray-100 mt-4">{getStatus()}</h1>
     </div>
   );
 };

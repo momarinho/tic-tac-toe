@@ -8,8 +8,10 @@ const AIGame = () => {
 
   useEffect(() => {
     if (!xIsNext) {
-      const aiMove = getAiMove(squares);
-      handleClick(aiMove);
+      setTimeout(() => {
+        const aiMove = getAiMove(squares);
+        handleClick(aiMove);
+      }, 1000);
     }
   }, [xIsNext]);
 
@@ -54,8 +56,6 @@ const AIGame = () => {
   };
 
   const getAiMove = (squares) => {
-    // In this simple AI implementation, we'll just have the AI pick a random
-    // empty square to place its piece.
     const emptySquares = squares.reduce(
       (acc, curr, index) => (!curr ? [...acc, index] : acc),
       []
@@ -68,6 +68,7 @@ const AIGame = () => {
   }, [squares]);
 
   const getStatus = () => {
+    const winner = calculateWinner(squares);
     if (winner) {
       return `Winner: ${winner}`;
     } else if (squares.every(Boolean)) {
@@ -78,18 +79,24 @@ const AIGame = () => {
   };
 
   return (
-    <div className="w-screen h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-4">TicTacToe</h1>
-      <Board squares={squares} onClick={handleClick} />
-      {(winner || squares.every(Boolean)) && (
-        <button
-          className="bg-gray-500 text-white rounded-md py-2 px-4 mt-4 hover:bg-gray-700"
-          onClick={handleReset}
-        >
-          Play again
-        </button>
-      )}
-      <h1>{getStatus()}</h1>
+    <div className="w-screen h-screen bg-gray-700 flex flex-col items-center justify-center">
+      <div>
+        <h1 className="text-2xl text-gray-100 font-bold mb-4">
+          Single Player Mode
+        </h1>
+        <div className="bg-gray-400 rounded-lg py-4 px-4">
+          <Board squares={squares} onClick={handleClick} />
+        </div>
+        {(winner || squares.every(Boolean)) && (
+          <button
+            className="bg-gray-500 text-white rounded-md py-2 px-4 mt-4 hover:bg-gray-600"
+            onClick={handleReset}
+          >
+            Play again
+          </button>
+        )}
+        <h1 className="font-bold text-gray-100 mt-4">{getStatus()}</h1>
+      </div>
     </div>
   );
 };

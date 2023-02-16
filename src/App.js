@@ -1,12 +1,10 @@
 import './App.css';
-import Game from './components/Game';
-import SinglePlayer from './screens/Single';
-import TwoPlayers from './screens/TwoPlayer';
+import Home from './screens/Home';
 
 function App() {
   return (
     <div className="App">
-      <TwoPlayers />
+      <Home />
     </div>
   );
 }

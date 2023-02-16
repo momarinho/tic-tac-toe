@@ -5,16 +5,26 @@ import TwoPlayers from './TwoPlayer';
 
 const Home = () => {
   return (
-    <div className=''>
-      <h1 className=''>Tic Tac Toe</h1>
-      <p>Please Choose a Game Mode:</p>
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      <h1 className="text-4xl mb-4">Tic Tac Toe</h1>
+      <p className="text-lg mb-2">Please Choose a Game Mode:</p>
       <nav>
-        <ul>
-          <li>
-            <Link to="/singleplayer">Single Player</Link>
+        <ul className="flex justify-center items-center">
+          <li className="mx-4">
+            <Link
+              to="/singleplayer"
+              className="text-lg px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600"
+            >
+              Single Player
+            </Link>
           </li>
-          <li>
-            <Link to="/twoplayer">Two Player</Link>
+          <li className="mx-4">
+            <Link
+              to="/twoplayer"
+              className="text-lg px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600"
+            >
+              Two Player
+            </Link>
           </li>
         </ul>
       </nav>

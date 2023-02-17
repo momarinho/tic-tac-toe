@@ -1,4 +1,7 @@
-Screenshots
+A TicTacToe game with 2 game modes.
+The 1P mode has some AI.
+
+<h1>Screenshots</h1>
 
 <img src='./assets/home.png' alt='home'/>
 <img src='./assets/1p.png' alt='home'/>

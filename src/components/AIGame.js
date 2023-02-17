@@ -11,7 +11,7 @@ const AIGame = () => {
       setTimeout(() => {
         const aiMove = getAiMove(squares);
         handleClick(aiMove);
-      }, 1000);
+      }, 500);
     }
   }, [xIsNext]);
 
